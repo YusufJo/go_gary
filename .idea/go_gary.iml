@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../go_gary">
+      <excludeFolder url="file://$MODULE_DIR$/../go_gary/out" />
+      <excludeFolder url="file://$MODULE_DIR$/../go_gary/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../go_gary/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/../go_gary/temp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

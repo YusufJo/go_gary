@@ -1,0 +1,348 @@
+@startuml
+skinparam linetype ortho
+package "util" {
+
+    class Configuration {
+        + totalSceneWidth: number
+        + visibleSceneWidth: number
+        + sceneHeight: number
+        + visibleDrawingArea: number
+        + characterStartingPoint: number
+        + characterEndingPoint: number
+        + {static} instance(): Configuration
+    }
+}
+
+package "view" {
+    class Sketch {
+        ---
+        set(): void
+        draw(): void
+    }
+
+    package "game objects" {
+        class Sky {
+            + {static} instance(): Sky
+            + draw(): void
+        }
+
+        class CoralTrees {
+            + {static} instance(): CoralTrees
+            + draw(): void
+        }
+
+        class FlowerClouds {
+            + {static} instance(): FlowerCloud
+            + draw(): void
+        }
+
+        class Mountains {
+            + {static} instance(): Mountains
+            + draw(): void
+        }
+
+        class Ground {
+            + {static} instance(): Ground
+            + draw(): void
+        }
+
+        class Rocks {
+            + {static} instance(): Rocks
+            + draw(): void
+        }
+
+        class ColorfulParticles {
+            + {static} instance(): ColorfulParticles
+            + draw(): void
+        }
+
+        class GameCharacter {
+            + {static} instance(): GameCharacter
+            + draw(): void
+        }
+
+        class Manholes {
+            + {static} instance(): Manholes
+            + draw(): void
+        }
+
+        class ScaryEyes {
+            + {static} instance(): ScaryEyes
+            + draw(): void
+        }
+    }
+    
+   class Animator {
+        + {static} instance(): Animator
+        + controlGameSet(): void
+        + controlGameLoop(): void
+        + listenForKeys(): void
+   }
+    
+    class BufferedRenderer {
+        + render(): void
+    }
+    
+}
+
+package "controller" {
+    abstract class MovableSceneryModelsController {
+        # _models: MovableSceneryModel[]
+        + move(): void
+        # constructor(): MovableSceneryModelsController
+    }
+
+    class SkyRaysController {
+        + {static} instance(): SkyRaysController
+        + models(): SkyRayModel[]
+        + generateModels(): void
+   }
+
+   class CoralTreesController {
+        + {static} instance(): CoralTreesController
+        + models(): CoralTreeModel[]
+        + generateModels(): void
+   }
+
+   class FlowerCloudsController {
+        + {static} instance(): FlowerCloudsController
+        + models(): FlowerCloud[]
+        + generateModels(): void
+   }
+
+   class MountainsController {
+        + {static} instance(): MountainsController
+        + models(): MountainModel[]
+        + generateModels(): void
+   }
+
+   class GroundController {
+        + {static} instance(): GroundController
+        + models(): GroundModel[]
+        + generateModels(): void
+   }
+
+   class RocksController {
+        + {static} instance(): RocksController
+        + models(): RockModel[]
+        + generateModels(): void
+   }
+
+   class ColorfulParticlesController {
+        + {static} instance(): ColorfulParticlesController
+        + models(): ColorfulParticleModel[]
+        + generateModels(): void
+   }
+
+   class ManholeController {
+        + {static} instance(): ManholeController
+        + models(): ManholeModel[]
+        + generateModels(): void
+   }
+
+   class ScaryEyesController {
+        + {static} instance(): ScaryEyesController
+        + models(): ScaryEyesModel[]
+        + generateModels(): void
+   }
+
+   class GameCharacterController {
+        + {static} instance(): GameCharacterController
+        + model(): GameCharacterModel
+        + generateModel(): void
+   }
+}
+
+package "model" {
+    abstract class MovableSceneryModel {
+        + center_x: number
+        + bottom_y: number
+        # constructor(): MovableSceneryModel
+    }
+
+    class SkyRayModel {
+        + {static} colors: Object
+        + start_x: number
+        + end_x: number
+        + start_y: number
+        + end_y : number
+        + constructor(): SkyRayModel
+    }
+
+    class CoralTreeModel {
+        + {static} colors: Object
+        + {static} maxSpacing: number
+        + isReflected: boolean
+        + constructor(): CoralTreeModel
+    }
+
+    class FlowerCloudModel {
+        + {static} colors: Object
+        + {static} minScale: number
+        + {static} maxScale: number
+        + {static} minOpacity: number
+        + {static} maxOpacity: number
+        + {static} maxSpacing: number
+        + scale: number
+        + color: string
+        + opacity: number
+        + constructor(): FlowerCloudModel
+    }
+
+    class MountainModel {
+        + {static} colors: Object
+        + {static} minScale: number
+        + {static} maxScale: number
+        + {static} maxSpacing: number
+        + variant: number
+        + scale: number
+        + constructor(): MountainModel
+    }
+
+    class SandModel {
+        + {static} color: string
+    }
+    
+    class RoadModel {
+        + {static} colors: Object
+    }
+
+    abstract class GroundModel {
+        + start_x: number
+        + end_x: number
+        + start_y: number
+        + end_y: number
+        + constructor(): Road
+    }
+
+    class RockModel {
+        + {static} colors: Object
+        + {static} maxSpacing: number
+        + scale: number
+        + constructor(): RockModel
+    }
+
+    class ColorfulParticleModel {
+        + {static} colors: string[]
+        + {static} minWidth: number
+        + {static} maxWidth: number
+        + {static} minHeight: number
+        + {static} maxHeight: number
+        + width: number
+        + height: number
+        + color: string
+        + constructor(): ColorfulParticleModel
+    }
+
+    class ManholeModel {
+        + {static} colors
+    }
+
+    class ScaryEyesModel {
+        + {static} colors
+        + {static} width: number
+        + {static} height: number
+        + {static} spacing: number
+    }
+
+    class GameCharacterModel {
+        + {static} colors: Object
+        + center_x: number
+        + bottom_y: number
+        + sprite: Sprite
+        + rotation: number
+        + constructor(): GameCharacterModel
+    }
+
+}
+
+MovableSceneryModelsController "1" ----> "1" Configuration : <<use>>
+
+Sky "1" -----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" Sky: <<draw>>
+Sky "1" -----> "1" SkyRaysController : <<use>>
+SkyRaysController "1" ----> "*" SkyRayModel : <<create>>
+
+CoralTrees "1" -----> "1" Configuration: <<use>>
+Sketch "1" ----> "1" CoralTrees : <<draw>>
+CoralTrees "1" ----> "1" BufferedRenderer : <<use>>
+CoralTrees "1" -----> "1" CoralTreesController : <<use>>
+CoralTreesController ---|> MovableSceneryModelsController : <<extend>>
+CoralTreesController "1" ----> "*" CoralTreeModel : <<create>>
+CoralTreeModel  --|> MovableSceneryModel : <<extend>>
+
+FlowerClouds "1" -----> "1" Configuration : <<use>>
+Sketch "1" ---> "1" FlowerClouds : <<draw>>
+FlowerClouds "1" ----> "1" BufferedRenderer : <<use>>
+FlowerClouds "1" ---> "1" FlowerCloudsController : <<use>>
+FlowerCloudsController ---|> MovableSceneryModelsController : <<extend>>
+FlowerCloudsController "1" ---> "*" FlowerCloudModel : <<create>>
+FlowerCloudModel  --|> MovableSceneryModel : <<extend>>
+
+Mountains "1" -----> "1" Configuration : <<use>>
+Sketch "1" ---> "1" Mountains : <<draw>>
+Mountains "1" ----> "1" BufferedRenderer : <<use>>
+Mountains "1" ---> "1" MountainsController : <<use>>
+MountainsController ---|> MovableSceneryModelsController : <<extend>>
+MountainsController "1" ---> "*" MountainModel : <<create>>
+MountainModel --|> MovableSceneryModel : <<extend>>
+
+Ground "1" -----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" Ground : <<draw>>
+Ground "1" ----> "1" BufferedRenderer : <<use>>
+Ground "1" ----> "1" GroundController : <<use>>
+GroundController "1" ----> "*" RoadModel : <<create>>
+GroundController "1" ----> "*" SandModel : <<create>>
+RoadModel --|> GroundModel : <<extend>>
+SandModel --|> GroundModel : <<extend>>
+
+Rocks "1" ----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" Rocks : <<draw>>
+Rocks "1" ----> "1" BufferedRenderer : <<use>>
+Rocks "1" ----> "1" RocksController : <<use>>
+RocksController ---|> MovableSceneryModelsController : <<extend>>
+RocksController "1" ----> "*" RockModel : <<create>>
+RockModel --|> MovableSceneryModel : <<extend>>
+
+ColorfulParticles "1" ----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" ColorfulParticles : <<draw>>
+ColorfulParticles "1" ----> "1" BufferedRenderer : <<use>>
+ColorfulParticles "1" ----> "1" ColorfulParticlesController : <<use>>
+ColorfulParticlesController ---|> MovableSceneryModelsController : <<extend>>
+ColorfulParticlesController "1" ----> "*" ColorfulParticleModel : <<create>>
+ColorfulParticleModel --|> MovableSceneryModel : <<extend>>
+
+
+Manholes "1" ----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" Manholes : <<draw>>
+Manholes "1" ----> "1" BufferedRenderer : <<use>>
+Manholes "1" ----> "1" ManholeController : <<use>>
+ManholeController ---|> MovableSceneryModelsController : <<extend>>
+ManholeController "1" ----> "*" ManholeModel : <<create>>
+ManholeModel --|> MovableSceneryModel : <<extend>>
+
+
+ScaryEyes "1" ----> "1" Configuration : <<use>>
+Sketch "1" ----> "1" ScaryEyes : <<draw>>
+ScaryEyes "1" ----> "1" BufferedRenderer : <<use>>
+ScaryEyes "1" ----> "1" ScaryEyesController : <<use>>
+ScaryEyesController ---|> MovableSceneryModelsController : <<extend>>
+ScaryEyesController "1" ----> "*" ScaryEyesModel : <<create>>
+ScaryEyesModel --|> MovableSceneryModel : <<extend>>
+
+GameCharacter "1" ----> Configuration : <<use>>
+Sketch "1" ----> "1" GameCharacter : <<draw>>
+GameCharacter "1" ----> "1" GameCharacterController : <<use>>
+GameCharacterController "1" ----> "1" GameCharacterModel : <<create>>
+
+Sketch "1" --right--> "1" Animator : <<use>>
+Animator "1" ----> "1" GameCharacterController : <<use>>
+Animator "1" ----> "1" CoralTreesController : <<use>>
+Animator "1" ----> "1" FlowerCloudsController : <<use>>
+Animator "1" ----> "1" ColorfulParticlesController : <<use>>
+Animator "1" ----> "1" ManholeController : <<use>>
+Animator "1" ----> "1" RocksController : <<use>>
+Animator "1" ----> "1" MountainsController : <<use>>
+Animator "1" ----> "1" GroundController : <<use>>
+Animator "1" ----> "1" Configuration : <<use>>
+@enduml

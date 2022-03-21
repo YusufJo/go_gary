@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": false,
+    "removeComments": false,
+    "rootDir": "src",
+    "outDir": "out",
+    "strict": true,
+    "module": "None",
+    "types": [
+      "p5/global",
+    ]
+  },
+  "files": [
+    "node_modules/@types/p5/global.d.ts",
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

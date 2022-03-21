@@ -1,0 +1,17 @@
+{
+  "name": "testing_p5_with_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "out/index.html",
+  "directories": {
+    "lib": "out/lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "amyh",
+  "license": "ISC",
+  "dependencies": {
+    "@types/p5": "^1.3.0"
+  }
+}

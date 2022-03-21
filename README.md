@@ -8,6 +8,11 @@
 <img width="1000" src="art/game.png">
 </p>
 
+---
+### Try it now => https://yusufjo.github.io/go_gary/
+**Known limitations:
+Running p5js on Safari has unpredictable results.
+
 ## Background
 
 **Garold "Gary" Wilson**, Jr. is SpongeBob SquarePants' pet sea snail and the most seen pet in the series. He lives with

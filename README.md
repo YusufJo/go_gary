@@ -9,7 +9,7 @@
 </p>
 
 ---
-### Try it now => https://yusufjo.github.io/go_gary/
+### Try it now => https://a-hamouda.github.io/go_gary/
 **Known limitations:
 Running p5js on Safari has unpredictable results.
 
